@@ -3525,16 +3525,16 @@ values
   ('499', '5', '1', '2020-02-03', '9999-12-31'),
   ('500', '2', '2', '2020-04-15', '9999-12-31');
 
-CREATE TABLE customer_transactions (
-  customer_id INTEGER,
-  txn_date DATE,
-  txn_type VARCHAR(10),
-  txn_amount INTEGER
+create table customer_transactions (
+  customer_id int,
+  txn_date date,
+  txn_type varchar(10),
+  txn_amount int
 );
 
-INSERT INTO customer_transactions
+insert into customer_transactions
   (customer_id, txn_date, txn_type, txn_amount)
-VALUES
+values
   ('429', '2020-01-21', 'deposit', '82'),
   ('155', '2020-01-10', 'deposit', '712'),
   ('398', '2020-01-01', 'deposit', '196'),
