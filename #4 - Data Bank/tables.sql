@@ -1,5 +1,3 @@
-
-
 create table regions (
   region_id integer,
   region_name varchar(9)
