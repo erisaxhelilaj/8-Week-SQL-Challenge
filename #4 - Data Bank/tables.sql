@@ -15,17 +15,17 @@ values
   ('5', 'Europe');
 
 
-CREATE TABLE customer_nodes (
-  customer_id INTEGER,
-  region_id INTEGER,
-  node_id INTEGER,
-  start_date DATE,
-  end_date DATE
+create table customer_nodes (
+  customer_id int,
+  region_id int,
+  node_id int,
+  start_date date,
+  end_date date
 );
 
-INSERT INTO customer_nodes
+insert into customer_nodes
   (customer_id, region_id, node_id, start_date, end_date)
-VALUES
+values
   ('1', '3', '4', '2020-01-02', '2020-01-03'),
   ('2', '3', '5', '2020-01-03', '2020-01-17'),
   ('3', '5', '4', '2020-01-27', '2020-02-18'),
