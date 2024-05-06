@@ -111,22 +111,53 @@ from data_bank.customer_nod
 <hr/>
 
 ### 5. What is the median, 80th and 95th percentile for this same reallocation days metric for each region?
-
-```sql
-
-```
+````sql
+WITH 
+	diff_data --difference between start_date and end_date
+AS
+	(
+		select 
+			n.customer_id,
+			n.region_id, 
+			r.region_name,
+			DATEDIFF(D, n.start_date, n.end_date) diff
+		from customer_nodes n
+		left join regions r on n.region_id = r.region_id
+		where end_date != '99991231'
+	)
+select distinct
+	region_id,
+	region_name,
+	PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY diff)
+		OVER (PARTITION BY region_name) AS median,
+	PERCENTILE_CONT(0.8) WITHIN GROUP (ORDER BY diff)
+		OVER (PARTITION BY region_name) AS percentile_80,
+	PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY diff)
+		OVER (PARTITION BY region_name) AS percentile_95
+from diff_data
+order by region_id;
+````
 #### Steps:
--`
-- 
--
+- Use **datediff** to find the day difference between `start_date` and `end_date`
+- Use **percentile_cont** and **within group** to find the `median`, 80th and 95th `percentile`.
 
+#### Answer:
+region_id | region_name | median | percentile_80 | percentile_95
+--| -- | -- | -- | --
+1 | Australia | 15 | 23 | 28
+2 | America | 15 | 23 | 28
+3 | Africa | 15 | 24 | 28
+4 | Asia | 15 | 23 | 28
+5 | Europe | 15 | 24 | 28
 
-#### Answer
-| customer_id | product_name | number_of_order|
-| ----------- | ------------ | -------------- |
-|     A       |    ramen     |       3        |
-|     B       |    sushi     |       3        |
-|     C       |    ramen     |       3        |
+- For Australian reallocation days, the median, 80th and 95th percentiles, respectively, are 15, 23, 28.
+- For American reallocation days, the median, 80th and 95th percentiles, respectively, are 15, 23, 28.
+- For African reallocation days, the median, 80th and 95th percentiles, respectively, are 15, 24, 28.
+- For Asian reallocation days, the median, 80th and 95th percentiles, respectively, are 15, 23, 28.
+- For European reallocation days, the median, 80th and 95th percentiles, respectively, are 15, 24, 28.
 
-<hr/>
+***
+
+# <p align="center" style="margin-top: 0px;">👩‍💻👩‍💻👩‍💻
+
 
