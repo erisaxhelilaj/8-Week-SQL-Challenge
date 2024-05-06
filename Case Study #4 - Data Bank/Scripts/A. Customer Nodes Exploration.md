@@ -4,7 +4,7 @@
 
 ## Solution
 
-View the complete syntax [*here*](https://github.com/erisaxhelilaj/my_portofolio/blob/main/%234%20-%20Data%20Bank/questions.sql).
+View the complete syntax [*here*](https://github.com/erisaxhelilaj/my_portofolio/blob/main/Case%20Study%20%234%20-%20Data%20Bank/Scripts/A.%20Customer%20Nodes%20Exploration.sql).
 
 
 
