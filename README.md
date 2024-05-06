@@ -1,4 +1,4 @@
-# <p align="center" style="margin-top: 0px;">💥 8 Week SQL Challenge 💥
+# <p align="center" style="margin-top: 0px;"> 🏆 8 Week SQL Challenge 🏆
 
 This repository contains the solution for case studies in **[8WeekSQLChallenge](https://8weeksqlchallenge.com)**!
 
@@ -26,7 +26,7 @@ Another initiative from Danny - Bank Data - some sort of intersection between Ne
 The management team at Data Bank want to increase their total customer base - but also need some help tracking just how much data storage their customers will need.
   **Calculating metrics, growth and analyse data to better forecast and plan for their future developments!**
 
-Check out the full case study [here](https://8weeksqlchallenge.com/case-study-4/) and my **solution** on [GitHub](https://github.com/hydaai/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank) 
+Check out the full case study [here](https://8weeksqlchallenge.com/case-study-4/) and my **solution** on [GitHub](https://github.com/erisaxhelilaj/my_portofolio/tree/main/Case%20Study%20%234%20-%20Data%20Bank) 
 ***
 
 ## 🛒 Case Study #5 - Data Mart 
