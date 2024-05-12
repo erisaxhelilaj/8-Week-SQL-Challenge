@@ -30,10 +30,10 @@ View the complete syntax [*here*](https://github.com/hydaai/8-Week-SQL-Challenge
 ### Create New Table `clean_weekly_sales`
 | Column | Actions |
 | -- | -- |
-| week_date | change datatype to **date** with **CAST**  |
-| week_number | return to number of week with **DATEPART** |
-| month_number | return to number of month with **DATEPART** |
-| calendar_year | return to number of year with **DATEPART** |
+| week_date | change datatype to **date** with **to_date**  |
+| week_number | return to number of week with **extract** |
+| month_number | return to number of month with **extract** |
+| calendar_year | return to number of year with **extract** |
 | region | no changes |
 | platform | no changes |
 | segment | no changes |
@@ -46,28 +46,29 @@ View the complete syntax [*here*](https://github.com/hydaai/8-Week-SQL-Challenge
 
 #### Answer:
 ````sql
-DROP TABLE IF EXISTS clean_weekly_sales;
+drop table if exists data_mart.clean_weekly_sales;
+create table data_mart.clean_weekly_sales as
 select 
-	CAST(week_date as date) week_date,
-	DATEPART(WEEK, CAST(week_date as date)) week_number,
-	DATEPART(M, CAST(week_date as date)) month_number,
-	DATEPART(YY, CAST(week_date as date)) calendar_year,
-	region,
-	platform,
-	segment,
-	case when RIGHT(segment, 1) = '1' then 'Young Adults'
-		when RIGHT(segment, 1) = '2' then 'Middle Aged'
-		when RIGHT(segment, 1) = '3' or RIGHT(segment, 1) = '4' then 'Retirees'
-		else 'unknown' end age_band,
-	case when LEFT(segment, 1) = 'C' then 'Couples'
-		when LEFT(segment, 1) = 'F' then 'Families'
-		else 'unknown' end demographic,
-	customer_type,
-	CAST(transactions as float) transactions,
-	CAST(sales as float) sales,
-	ROUND(CAST(sales as float)/CAST(transactions as float), 2) avg_transaction
-into clean_weekly_sales
-from weekly_sales;
+      to_date(week_date, 'DD/MM/YY') as week_date
+    , extract(week from to_date(week_date, 'DD/MM/YY')) as num_week
+    , extract(month from to_date(week_date, 'DD/MM/YY')) as month 
+    , extract(year from to_date(week_date, 'DD/MM/YY')) as year
+    , region
+    , platform
+    , segment
+    , (case when right(segment, 1) = '1' then 'Young Adults'
+           when right(segment, 1) = '2' then 'Middle Aged'  
+           when right(segment, 1) in ('3', '4') then 'Retirees' else 'unknown' end) as age_band
+    , (case when left(segment, 1) = 'C' then 'Couples'
+            when left(segment, 1) = 'F' then 'Families' else 'unknown' end) as demographic
+    , customer_type        
+    , transactions::float
+    , sales::float
+    , round(sales::numeric/transactions, 2) as avg_transaction
+from data_mart.weekly_sales;
+
+select *
+from data_mart.clean_weekly_sales;
 ````
 
 We got a new table.
