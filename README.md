@@ -47,7 +47,7 @@ The key business question to answer are the following:
 - **Which platform, region, segment and customer types were the most impacted by this change?**
 - **What can we do about future introduction of similar sustainability updates to the business to minimise impact on sales?**
 
-Check out the full case study [here](https://8weeksqlchallenge.com/case-study-5/) and my **solution** on [GitHub](https://github.com/hydaai/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart)
+Check out the full case study [here](https://8weeksqlchallenge.com/case-study-5/) and my **solution** on [GitHub](https://github.com/erisaxhelilaj/my_portofolio/tree/main/Case%20Study%20%235%20-%20Data%20Mart)
 
 ***
 
