@@ -74,7 +74,7 @@ from data_mart.clean_weekly_sales;
 We got a new table.
 
 ***NOTE*** : *Not all output is displayed, considering the number of results and will take up space*	
-week_date | week_number | month_number | calendar_year | region | platform | segment | age_band | demographic | customer_type | transactions | sales | avg_transaction
+week_date | num_week | month | year | region | platform | segment | age_band | demographic | customer_type | transactions | sales | avg_transaction
 -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | --
 2020-08-31 | 36 | 8 | 2020 | ASIA | Retail | C3 | Retirees | Couples | New | 120631 | 3656163 | 30.31
 2020-08-31 | 36 | 8 | 2020 | ASIA | Retail | F1 | Young Adults | Families | New | 31574 | 996575 | 31.56
