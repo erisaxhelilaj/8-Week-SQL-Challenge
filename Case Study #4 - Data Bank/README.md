@@ -8,10 +8,7 @@
 - [Entity Relationship Diagram](#entity-relationship-diagram)
 - [Available Data](#available-data)
 - [Case Study Questions](#case-study-questions)
-- Solution 
-  - GitHub
-    - [A. Customer Nodes Exploration](https://github.com/erisaxhelilaj/my_portofolio/blob/main/Case%20Study%20%234%20-%20Data%20Bank/A.%20Customer%20Nodes%20Exploration.md)
-    - [B. Customer Transactions.md](https://github.com/erisaxhelilaj/my_portofolio/blob/main/Case%20Study%20%234%20-%20Data%20Bank/B.%20Customer%20Transactions.md)
+- Solution: [GitHub](https://github.com/erisaxhelilaj/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank/Scripts)
 
     
 ***
