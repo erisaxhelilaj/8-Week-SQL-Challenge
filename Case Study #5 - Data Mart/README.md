@@ -8,10 +8,8 @@
 - [Entity Relationship Diagram](#entity-relationship-diagram)
 - [Available Data](#available-data)
 - [Case Study Questions](#case-study-questions)
-- Solution 
-  - GitHub
-    - [A.](https://github.com/hydaai/8-Week-SQL-Challenge/blob/83f5ea092b0e305cc61ec4843f0d9559d78c27b0/Case%20Study%20%234%20-%20Data%20Bank/A.%20Customer%20Nodes%20Exploration.md)
-    - [B. ](https://github.com/hydaai/8-Week-SQL-Challenge/blob/74679d15086153e06f6a2246034119d5172e56bf/Case%20Study%20%234%20-%20Data%20Bank/B.%20Customer%20Transactions.md)
+- Solution: [GitHub](https://github.com/erisaxhelilaj/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart/Scripts)
+  
  
     
  
