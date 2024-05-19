@@ -3,7 +3,7 @@
 
 ## Solution
 
-View the complete syntax [*here*](https://github.com/hydaai/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart/Scripts).
+View the complete syntax [*here*](https://github.com/erisaxhelilaj/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Scripts/B.%20Data%20Exploration.sql).
 
 ***
 
