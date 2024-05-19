@@ -10,21 +10,21 @@ View the complete syntax [*here*](https://github.com/hydaai/8-Week-SQL-Challenge
 ## 1. *What day of the week is used for each week_date value?*
 
 #### Steps:
-- Find the day used for the `week_date` value using **to_chart**.
+- Find the day used for the `week_date` value using **TO_CHAR**.
 
-		````sql
-		   select
-				week_date
-			, to_char(week_date, 'Day') as day_name
-			from data_mart.clean_weekly_sales;
+````sql
+      select
+        week_date
+      , to_char(week_date, 'Day') as day_name
+    from data_mart.clean_weekly_sales;
 ````
 
 
 #### Answer:
 
-| day_name |
-| -- |
-| Monday |
+| day_name  |
+| --------- |
+| Monday    |
 
 - Monday is used for each week_date value.
 
@@ -37,16 +37,13 @@ View the complete syntax [*here*](https://github.com/hydaai/8-Week-SQL-Challenge
 - Look for which weeks are not in the dataset
 - Find out how many weeks are missing in the dataset using **COUNT**.
 
-		````sql 
-		      with all_weeks as (
-					select 
-						generate_series(1, 52) as week_number
-				),
-
-				existing_weeks as (
+````sql
+with all_weeks as (
+               select 
+               generate_series(1, 52) as week_number),
+                     existing_weeks as (
 					select distinct num_week as week_number
-					from  data_mart.clean_weekly_sales
-				)
+					from  data_mart.clean_weekly_sales)
 				select 
 				count(a.week_number) as missing_weeks_count
 				from all_weeks a
@@ -54,12 +51,11 @@ View the complete syntax [*here*](https://github.com/hydaai/8-Week-SQL-Challenge
 				where e.week_number is null;
 ````
 
-
 #### Answer:
 
 | missing_weeks_count |
-| -- |
-| 28 |
+| ------------------- |
+| 28                  |
 
 - There are 28 week numbers are missing.
 
@@ -72,12 +68,12 @@ View the complete syntax [*here*](https://github.com/hydaai/8-Week-SQL-Challenge
 - Use **GROUP BY** to separate results each year.
 
 ````sql
-		select
-					year 
-				, sum(transactions) as total_transactions
-				from data_mart.clean_weekly_sales
-				group by year
-				order by year;
+       select
+           year 
+         , sum(transactions) as total_transactions
+       from data_mart.clean_weekly_sales
+       group by year
+       order by year;
 ````
 
 
@@ -102,13 +98,13 @@ year | total_transactions
 - Use **GROUP BY** to separate by region for each month.
 
 ````sql
-		select 
-					region
-					, month
-					, sum (sales) as total_sales
-				from  data_mart.clean_weekly_sales
-				group by  region, month
-				order by  region, month;
+        select 
+            region
+          , month
+          , sum (sales) as total_sales
+        from  data_mart.clean_weekly_sales
+        group by  region, month
+        order by  region, month;
 ````
 
 
@@ -144,12 +140,12 @@ ASIA | 9 | 252836807
 
 
 ````sql
-		select 
-					platform
-				, sum(transactions) as total_transactions
-				from  data_mart.clean_weekly_sales
-				group by platform  
-				order by  platform; 
+      select 
+          platform
+        , sum(transactions) as total_transactions
+      from  data_mart.clean_weekly_sales
+      group by platform  
+      order by  platform; 
 ````
 
 
@@ -171,24 +167,22 @@ Shopify | 5925169
 - Find out the percentage of Retail and Shopify sales each month.
 
 ````sql
-		select 
-					month
-					, year
-					, platform
-					, round(cast(sales_percentage as numeric), 2) as rounded_sales_percentage
-				from (
-					select 
-						extract(month from week_date) as month
-					, extract(year from week_date) as year
-					,  platform
-					,  (sum(sales) * 100.0 / sum(sum(sales)) over (partition by extract(month from week_date)
-					,  extract(year from week_date)))::double precision as sales_percentage
-					from data_mart.clean_weekly_sales
-					where platform in ('Retail', 'Shopify')
-					
-					group by  extract(month from week_date),  extract(year from week_date), platform     
-				) as subquery
-				order by year, month,  platform;
+         select 
+              month
+            , year
+            , platform
+            , round(cast(sales_percentage as numeric), 2) as rounded_sales_percentage
+         from (
+                  select 
+                     extract(month from week_date) as month
+                   , extract(year from week_date) as year
+                   ,  platform
+                   ,  (sum(sales) * 100.0 / sum(sum(sales)) over (partition by extract(month from week_date)
+                   ,  extract(year from week_date)))::double precision as sales_percentage
+                from data_mart.clean_weekly_sales
+                where platform in ('Retail', 'Shopify')
+                group by  extract(month from week_date),  extract(year from week_date), platform ) as subquery    
+                order by year, month,  platform;
 ````
 
 
@@ -214,16 +208,16 @@ Shopify | 5925169
 
 ````sql
 		select 
-							year,
-							demographic,
-							total_sales,
-							round(sales_percentage, 2) as sales_percentage
+                          year,
+                          demographic,
+                          total_sales,
+                          round(sales_percentage, 2) as sales_percentage
 						from (
-							select 
-								extract(year from week_date) as year,
-								demographic,
-								sum(sales) as total_sales,
-								(sum(sales) * 100.0 / sum(sum(sales)) over (partition by extract(year from week_date)))::numeric as sales_percentage
+                                                    select 
+                                                       extract(year from week_date) as year,
+                                                       demographic,
+                                                       sum(sales) as total_sales,
+                                                       (sum(sales) * 100.0 / sum(sum(sales)) over (partition by extract(year from week_date)))::numeric as sales_percentage
 						from data_mart.clean_weekly_sales
 						group by extract(year from  week_date), demographic
 						) as subquery
@@ -259,28 +253,22 @@ Shopify | 5925169
 - Use **GROUP BY** to separate results each `age_band` and `demographic`.
 
 ````sql
-		select 
-					age_band,
-					demographic,
-					total_sales,
-					round(cast(contribute_percent as numeric), 2) as contribute_percent
-				from (
-					select 
-						age_band,
-						demographic,
-						sum(sales) as total_sales,
-						100 * sum(sales) / sum(sum(sales)) over () as contribute_percent
-					from 
-						data_mart.clean_weekly_sales
-					where 
-						platform = 'Retail'
-					group by 
-						age_band,
-						demographic
-				) as subquery
-				order by 
-					total_sales desc;
-
+          select 
+              age_band,
+              demographic,
+              total_sales,
+              round(cast(contribute_percent as numeric), 2) as contribute_percent
+                 from (
+                      select 
+                           age_band,
+                           demographic,
+                           sum(sales) as total_sales,
+                           100 * sum(sales) / sum(sum(sales)) over () as contribute_percent
+                      from data_mart.clean_weekly_sales
+                      where platform = 'Retail'			
+                      group by age_band, demographic ) as subquery
+                      order by total_sales desc;
+					
 ````
 
 
@@ -301,7 +289,7 @@ Young Adults | Families | 1770889293 | 4.47
 
 ***
 
-## 9. *Can we use the avg_transaction column to find the average transaction size for each year for Retail vs Shopify? 
+## 9. Can we use the avg_transaction column to find the average transaction size for each year for Retail vs Shopify? 
 
 #### Steps:
 
@@ -309,14 +297,14 @@ Young Adults | Families | 1770889293 | 4.47
 
 
 ````sql
-		select 
-					extract(year from week_date) as year,
-					platform,
-					round(sum(sales)::numeric / sum(transactions)::numeric, 2) as average_transaction_size
-				from data_mart.clean_weekly_sales   
-				where platform in ('Retail', 'Shopify')  
-				group by  extract(year from week_date), platform
-				order by  year,  platform;
+      select 
+          extract(year from week_date) as year, 
+          platform,
+          round(sum(sales)::numeric / sum(transactions)::numeric, 2) as average_transaction_size
+      from data_mart.clean_weekly_sales   
+      where platform in ('Retail', 'Shopify')  
+      group by  extract(year from week_date), platform
+      order by  year,  platform;
 ````
 
 
