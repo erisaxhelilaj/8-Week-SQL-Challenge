@@ -4,7 +4,7 @@ This repository contains the solution for case studies in **[8WeekSQLChallenge](
 
 Thanks [DataWithDanny](https://github.com/DataWithDanny) for the excellent SQL case studies! 😊 
   
-  To complete this case study I used a SQL Server(main) and PostgreSQL database.
+  To complete this case study I used PostgreSQL database.
 
 ## 🧾 Table of Contents
 
